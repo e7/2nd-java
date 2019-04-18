@@ -1,4 +1,4 @@
-package com.rl160.s2nd.codec;
+package org.e7.s2nd.codec;
 
 public class SjsonbConsts {
     public static final int MAGIC_LEN = 4;

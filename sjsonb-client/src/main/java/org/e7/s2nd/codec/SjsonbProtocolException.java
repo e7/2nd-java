@@ -1,4 +1,4 @@
-package com.rl160.s2nd.codec;
+package org.e7.s2nd.codec;
 
 /**
  * @author e7

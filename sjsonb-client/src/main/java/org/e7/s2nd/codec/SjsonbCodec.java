@@ -1,12 +1,9 @@
-package com.rl160.s2nd.codec;
+package org.e7.s2nd.codec;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.net.SocketTimeoutException;
-
-import static com.rl160.s2nd.codec.SjsonbConsts.*;
 
 /**
  * @author e7
@@ -88,9 +85,9 @@ public class SjsonbCodec {
                 case EXP_CONTLEN:
                     readful(is, buf4);
                     contLen = (int)(BaseSerializer.byteArrayToInt(buf4) & 0x00000000ffffffffL);
-                    if (contLen > MAX_PACKAGE_SIZE) {
+                    if (contLen > SjsonbConsts.MAX_PACKAGE_SIZE) {
                         is.close();
-                        throw new SjsonbProtocolException(ETOO_LARGE_CONTENT);
+                        throw new SjsonbProtocolException(SjsonbConsts.ETOO_LARGE_CONTENT);
                     }
                     currentStatus = Status.EXP_CHECKSUM;
                     break;
@@ -116,13 +113,13 @@ public class SjsonbCodec {
 
     public void encodeToOutputStream(byte[] cargo) throws IOException {
         OutputStream os = skt.getOutputStream();
-        byte[] sendBuf = new byte[MAGIC_LEN + HEADER_LEN + cargo.length];
+        byte[] sendBuf = new byte[SjsonbConsts.MAGIC_LEN + SjsonbConsts.HEADER_LEN + cargo.length];
 
         System.arraycopy(
                 BaseSerializer.intToByteArray(0xE78F8A9D), 0, sendBuf, 0, 4
         );
         System.arraycopy(
-                BaseSerializer.intToByteArray(PROTO_VERSION), 0, sendBuf, 4, 4
+                BaseSerializer.intToByteArray(SjsonbConsts.PROTO_VERSION), 0, sendBuf, 4, 4
         );
         System.arraycopy(
                 BaseSerializer.shortToByteArray(3), 0, sendBuf, 8, 2

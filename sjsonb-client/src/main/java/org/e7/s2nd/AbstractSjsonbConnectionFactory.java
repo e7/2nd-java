@@ -1,6 +1,6 @@
-package com.rl160.s2nd;
+package org.e7.s2nd;
 
-import com.rl160.s2nd.codec.SjsonbCodec;
+import org.e7.s2nd.codec.SjsonbCodec;
 import org.apache.commons.pool2.PooledObject;
 import org.apache.commons.pool2.PooledObjectFactory;
 import org.apache.commons.pool2.impl.DefaultPooledObject;
